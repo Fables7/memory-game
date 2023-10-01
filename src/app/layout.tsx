@@ -5,7 +5,7 @@ import { Inter, Atkinson_Hyperlegible } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 const atkinson = Atkinson_Hyperlegible({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["700"],
 });
 
 export const metadata: Metadata = {
