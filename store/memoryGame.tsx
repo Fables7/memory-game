@@ -10,14 +10,6 @@ import {
   faTurkishLiraSign,
   faCar,
   faBolt,
-  faMugHot,
-  faFire,
-  faGamepad,
-  faFeather,
-  faMedal,
-  faDragon,
-  faPuzzlePiece,
-  faDice,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faGithub,
@@ -28,10 +20,6 @@ import {
   faGoogle,
   faWindows,
   faAndroid,
-  faPinterest,
-  faSpotify,
-  faReact,
-  faRebel,
 } from "@fortawesome/free-brands-svg-icons";
 
 const iconArrays = [
@@ -54,18 +42,6 @@ const iconArrays = [
   faWindows,
   faBolt,
   faAndroid,
-  faPinterest,
-  faSpotify,
-  faMugHot,
-  faFire,
-  faGamepad,
-  faFeather,
-  faMedal,
-  faDragon,
-  faPuzzlePiece,
-  faDice,
-  faReact,
-  faRebel,
 ];
 
 export const memoryGameSlice = createSlice({
@@ -79,6 +55,14 @@ export const memoryGameSlice = createSlice({
   },
   reducers: {
     startGame: (state, action) => {
+      const shuffleCards = () => {
+        if (state.theme === "Numbers") {
+          if (state.gridSize === "4x4") {
+            const shuffledCards = [...iconArrays];
+          }
+        }
+        const shuffledCards = [...iconArrays];
+      };
       state.theme = action.payload.theme;
       state.numPlayers = action.payload.numPlayers;
       state.gridSize = action.payload.gridSize;
