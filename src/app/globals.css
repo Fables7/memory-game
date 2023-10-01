@@ -12,6 +12,8 @@
   --active: #304859;
   --hover: #6395b8;
   --idle: #bcced9;
+  --white: #fcfcfc;
+  --text-gray: #7191a5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -53,4 +55,9 @@ p {
 }
 .game-number-large {
   font-size: 3.5rem;
+}
+
+label {
+  color: var(--text-gray);
+  font-size: 1.125rem;
 }
