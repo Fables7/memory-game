@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { faFutbol, faMoon } from "@fortawesome/free-regular-svg-icons";
+import {
+  IconDefinition,
+  faFutbol,
+  faMoon,
+} from "@fortawesome/free-regular-svg-icons";
 import {
   faAnchor,
   faFlask,
@@ -51,22 +55,45 @@ export const memoryGameSlice = createSlice({
     theme: "",
     numPlayers: null,
     gridSize: "",
-    array: [],
+    array: [] as (IconDefinition | number)[],
   },
   reducers: {
     startGame: (state, action) => {
       const shuffleCards = () => {
-        if (state.theme === "Numbers") {
-          if (state.gridSize === "4x4") {
-            const shuffledCards = [...iconArrays];
-          }
+        switch (action.payload.theme) {
+          case "Numbers":
+            if (action.payload.gridSize === "4x4") {
+              const array = new Array(8).fill(0).map((_, i) => i + 1);
+              const shuffledCards = [...array, ...array];
+              return shuffledCards;
+            }
+            if (action.payload.gridSize === "6x6") {
+              const array = new Array(18).fill(0).map((_, i) => i + 1);
+              const shuffledCards = [...array, ...array];
+              return shuffledCards;
+            }
+          case "Icons":
+            if (action.payload.gridSize === "4x4") {
+              const array = iconArrays.slice(0, 8);
+              const shuffledCards = [...array, ...array];
+              return shuffledCards;
+            }
+            if (action.payload.gridSize === "6x6") {
+              const array = iconArrays.slice(0, 18);
+              const shuffledCards = [...array, ...array];
+              return shuffledCards;
+            }
         }
-        const shuffledCards = [...iconArrays];
       };
       state.theme = action.payload.theme;
       state.numPlayers = action.payload.numPlayers;
       state.gridSize = action.payload.gridSize;
       state.gameStarted = true;
+      state.array = shuffleCards() || [];
     },
   },
 });
+
+export const { startGame } = memoryGameSlice.actions;
+
+export default memoryGameSlice.reducer;
