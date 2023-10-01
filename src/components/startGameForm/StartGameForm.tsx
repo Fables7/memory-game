@@ -1,6 +1,8 @@
 "use client";
 import { useState } from "react";
 import { CustomButton } from "..";
+import { useDispatch, useSelector } from "react-redux";
+import { startGame } from "../../../store/memoryGame";
 
 interface OptionsContainerProps {
   options: string[];
@@ -46,8 +48,18 @@ const StartGameForm = () => {
   const playerOptions = ["1", "2", "3", "4"];
   const gridSizeOptions = ["4x4", "6x6"];
 
+  const dispatch = useDispatch();
+
   const formSubmitHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    dispatch(
+      startGame({
+        theme,
+        numPlayers: Number(playerNum),
+        gridSize,
+        startGame: true,
+      })
+    );
     console.log("pressed");
   };
   return (

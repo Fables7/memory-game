@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
   IconDefinition,
   faFutbol,
@@ -48,23 +48,39 @@ const iconArrays = [
   faAndroid,
 ];
 
+interface MemoryGameState {
+  gameStarted: boolean;
+  theme: string;
+  numPlayers: number;
+  gridSize: string;
+  array: (IconDefinition | number)[];
+}
+
+interface StartGamePayload {
+  theme: string;
+  numPlayers: number;
+  gridSize: string;
+  startGame: boolean;
+}
+
 export const memoryGameSlice = createSlice({
   name: "memoryGame",
   initialState: {
     gameStarted: false,
     theme: "",
-    numPlayers: null,
+    numPlayers: 1,
     gridSize: "",
-    array: [] as (IconDefinition | number)[],
-  },
+    array: [],
+  } as MemoryGameState,
   reducers: {
-    startGame: (state, action) => {
+    startGame: (state, action: PayloadAction<StartGamePayload>) => {
       const shuffleCards = () => {
         switch (action.payload.theme) {
           case "Numbers":
             if (action.payload.gridSize === "4x4") {
               const array = new Array(8).fill(0).map((_, i) => i + 1);
               const shuffledCards = [...array, ...array];
+
               return shuffledCards;
             }
             if (action.payload.gridSize === "6x6") {

@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter, Atkinson_Hyperlegible } from "next/font/google";
+import ReduxProvider from "@/providers/reduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 const atkinson = Atkinson_Hyperlegible({
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} ${atkinson.className}`}>
-        {children}
+        <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
   );
