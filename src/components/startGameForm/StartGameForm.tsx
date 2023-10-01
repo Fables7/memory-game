@@ -27,6 +27,7 @@ const OptionsContainer = ({
             active={option === active}
             key={index}
             onClick={onClickHandler(option)}
+            type="button"
           >
             {option}
           </CustomButton>
@@ -47,6 +48,7 @@ const StartGameForm = () => {
 
   const formSubmitHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
+    console.log("pressed");
   };
   return (
     <div className="  min-w-[327px] h-[386px] bg-[var(--white)] rounded-lg p-5 ">
@@ -71,7 +73,10 @@ const StartGameForm = () => {
           active={gridSize}
           setActive={setGridSize}
         />
-        <CustomButton className="bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)] mt-auto h-[48px]">
+        <CustomButton
+          type="submit"
+          className="bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)] mt-auto h-[48px]"
+        >
           Start Game
         </CustomButton>
       </form>

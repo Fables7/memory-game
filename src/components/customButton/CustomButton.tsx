@@ -10,18 +10,19 @@ interface CustomButtonProps {
   activeColor?: string;
 }
 
-const CustomButton = ({ children, className, ...props }: CustomButtonProps) => {
+const CustomButton = (props: CustomButtonProps) => {
   const rootClassName = clsx(
     "h-[40px] bg-[var(--idle)] rounded-3xl w-full hover:bg-[var(--hover)]",
-    className
+    props.className
   );
   return (
     <button
-      {...props}
+      type={props.type}
+      onClick={props.onClick}
       style={{ backgroundColor: props.active ? "var(--active)" : undefined }}
       className={rootClassName}
     >
-      {children}
+      {props.children}
     </button>
   );
 };

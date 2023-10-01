@@ -8,8 +8,8 @@ export default function Home() {
   const [numPlayers, setNumPlayers] = useState(1);
   const [gridSize, setGridSize] = useState(4);
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-[var(--main-background)]">
-      <h1 className="text-white">memory</h1>
+    <main className="flex min-h-screen flex-col items-center pt-24  bg-[var(--main-background)]">
+      <h1 className="text-white mb-12">memory</h1>
       <StartGameForm />
     </main>
   );
