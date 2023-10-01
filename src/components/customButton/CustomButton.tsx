@@ -11,9 +11,16 @@ interface CustomButtonProps {
 }
 
 const CustomButton = ({ children, className, ...props }: CustomButtonProps) => {
-  const rootClassName = clsx("");
+  const rootClassName = clsx(
+    "h-[40px] bg-[var(--idle)] rounded-3xl w-full hover:bg-[var(--hover)]",
+    className
+  );
   return (
-    <button {...props} className={`h-[40px] bg-[var(--idle)] rounded-lg`}>
+    <button
+      {...props}
+      style={{ backgroundColor: props.active ? "var(--active)" : undefined }}
+      className={rootClassName}
+    >
       {children}
     </button>
   );
