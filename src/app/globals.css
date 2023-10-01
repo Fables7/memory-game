@@ -6,6 +6,12 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  /* Colors */
+  --orange-accent: #fda214;
+  --main-background: #152938;
+  --active: #304859;
+  --hover: #6395b8;
+  --idle: #bcced9;
 }
 
 @media (prefers-color-scheme: dark) {
