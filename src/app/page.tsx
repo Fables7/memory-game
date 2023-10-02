@@ -1,13 +1,18 @@
 "use client";
-import { StartGameForm } from "@/components";
+import { StartGameForm, MemoryGame } from "@/components";
 import { useSelector } from "react-redux";
 
 export default function Home() {
   const { gameStarted } = useSelector((state: any) => state.memoryGame);
   return (
-    <main className="flex min-h-screen flex-col items-center pt-24  bg-[var(--main-background)]">
+    <main
+      style={{
+        background: gameStarted ? "var(--white)" : "var(--main-background)",
+      }}
+      className="flex min-h-screen flex-col items-center pt-24 "
+    >
       <h1 className="text-white mb-12">memory</h1>
-      {!gameStarted ? <StartGameForm /> : <h1>hello </h1>}
+      {!gameStarted ? <StartGameForm /> : <MemoryGame />}
     </main>
   );
 }
