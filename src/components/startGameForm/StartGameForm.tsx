@@ -63,35 +63,39 @@ const StartGameForm = () => {
     console.log("pressed");
   };
   return (
-    <div className="  min-w-[327px] h-[386px] bg-[var(--white)] rounded-lg p-5 ">
-      <form className="flex flex-col h-full" onSubmit={formSubmitHandler}>
-        <OptionsContainer
-          label="Select Theme"
-          options={themeOptions}
-          active={theme}
-          setActive={setTheme}
-        />
+    <div className="flex flex-col items-center">
+      <h1 className="text-white mb-12">memory</h1>
 
-        <OptionsContainer
-          label="Number of Players"
-          options={playerOptions}
-          active={playerNum}
-          setActive={setPlayerNum}
-        />
+      <div className="  min-w-[327px] h-[386px] bg-[var(--white)] rounded-lg p-5 ">
+        <form className="flex flex-col h-full" onSubmit={formSubmitHandler}>
+          <OptionsContainer
+            label="Select Theme"
+            options={themeOptions}
+            active={theme}
+            setActive={setTheme}
+          />
 
-        <OptionsContainer
-          label="Grid Size"
-          options={gridSizeOptions}
-          active={gridSize}
-          setActive={setGridSize}
-        />
-        <CustomButton
-          type="submit"
-          className="bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)] mt-auto h-[48px]"
-        >
-          Start Game
-        </CustomButton>
-      </form>
+          <OptionsContainer
+            label="Number of Players"
+            options={playerOptions}
+            active={playerNum}
+            setActive={setPlayerNum}
+          />
+
+          <OptionsContainer
+            label="Grid Size"
+            options={gridSizeOptions}
+            active={gridSize}
+            setActive={setGridSize}
+          />
+          <CustomButton
+            type="submit"
+            className="bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)] mt-auto h-[48px]"
+          >
+            Start Game
+          </CustomButton>
+        </form>
+      </div>
     </div>
   );
 };

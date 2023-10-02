@@ -11,7 +11,6 @@ export default function Home() {
       }}
       className="flex min-h-screen flex-col items-center pt-24 "
     >
-      <h1 className="text-white mb-12">memory</h1>
       {!gameStarted ? <StartGameForm /> : <MemoryGame />}
     </main>
   );
