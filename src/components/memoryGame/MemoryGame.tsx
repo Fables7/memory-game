@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { GridButton, CustomButton, GameDetails, Modal } from "..";
+import { GridButton, CustomButton, GameDetails, SoloMenu, Modal } from "..";
 
 import { faFutbol, faMoon } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -148,14 +148,12 @@ const MemoryGame = () => {
           Menu
         </CustomButton>
       </div>
-      {menuOpen && (
+      {menuOpen && <SoloMenu setOpen={setMenuOpen} />}
+      {/* {menuOpen && (
         <Modal setOpen={setMenuOpen}>
-          <div className="w-[200px] h-[200px] bg-black">
-            <h1>Hello</h1>
-            <button onClick={() => setMenuOpen(false)}>Close</button>
-          </div>
+          <h1>hello</h1>
         </Modal>
-      )}
+      )} */}
       <div
         className="grid grid-cols-4 gap-5"
         style={{
