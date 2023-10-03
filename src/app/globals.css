@@ -15,6 +15,7 @@
   --idle: #bcced9;
   --white: #fcfcfc;
   --text-gray: #7191a5;
+  --light-gray: #dfe7ec;
 }
 
 @media (prefers-color-scheme: dark) {

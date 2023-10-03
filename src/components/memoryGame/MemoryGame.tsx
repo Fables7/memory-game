@@ -1,13 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { GridButton } from "..";
+import { GridButton, CustomButton, GameDetails } from "..";
 
-import {
-  IconDefinition,
-  faFutbol,
-  faMoon,
-} from "@fortawesome/free-regular-svg-icons";
+import { faFutbol, faMoon } from "@fortawesome/free-regular-svg-icons";
 import {
   faAnchor,
   faFlask,
@@ -99,7 +95,7 @@ const MemoryGame = () => {
     }
   };
 
-  const [array, setArray] = useState<any>(shuffleCards());
+  const [cards, setcards] = useState<any>(shuffleCards());
 
   const handleChoice = (choice: any) => {
     choiceOne ? setChoiceTwo(choice) : setChoiceOne(choice);
@@ -108,8 +104,8 @@ const MemoryGame = () => {
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.icon === choiceTwo.icon) {
-        setArray((prevArray: any) => {
-          return prevArray.map((card: any) => {
+        setcards((prevcards: any) => {
+          return prevcards.map((card: any) => {
             if (card.icon === choiceOne.icon) {
               return { ...card, matched: true };
             } else {
@@ -124,6 +120,12 @@ const MemoryGame = () => {
     }
   }, [choiceOne, choiceTwo]);
 
+  useEffect(() => {
+    if (cards.every((card: any) => card.matched)) {
+      console.log("you win");
+    }
+  }, [cards]);
+
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
@@ -131,8 +133,13 @@ const MemoryGame = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-black">Memory Game</h1>
+    <div className="min-h-screen">
+      <div className="flex justify-between items-center mt-5 mb-24">
+        <h2 className="text-black">memory</h2>
+        <CustomButton className=" max-w-[78px] bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)]">
+          Menu
+        </CustomButton>
+      </div>
       <div
         className="grid grid-cols-4 gap-5"
         style={{
@@ -141,7 +148,7 @@ const MemoryGame = () => {
           }, minmax(0, 1fr))`,
         }}
       >
-        {array.map((card: any) => {
+        {cards.map((card: any) => {
           return (
             <GridButton
               key={card.id}
@@ -156,6 +163,7 @@ const MemoryGame = () => {
           );
         })}
       </div>
+      <GameDetails turns={turns} />
     </div>
   );
 };

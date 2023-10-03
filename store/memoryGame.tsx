@@ -77,6 +77,7 @@ export const memoryGameSlice = createSlice({
       state.gridSize = action.payload.gridSize;
       state.gameStarted = true;
     },
+    endGame: (state) => {},
   },
 });
 
