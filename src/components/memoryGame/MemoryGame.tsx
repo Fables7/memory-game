@@ -149,9 +149,11 @@ const MemoryGame = () => {
         </CustomButton>
       </div>
       {menuOpen && (
-        <Modal>
-          <h1>Hello</h1>
-          <button onClick={() => setMenuOpen(false)}>Close</button>
+        <Modal setOpen={setMenuOpen}>
+          <div className="w-[200px] h-[200px] bg-black">
+            <h1>Hello</h1>
+            <button onClick={() => setMenuOpen(false)}>Close</button>
+          </div>
         </Modal>
       )}
       <div
