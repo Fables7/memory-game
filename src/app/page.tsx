@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   const { gameStarted } = useSelector((state: any) => state.memoryGame);
+
   return (
     <main
       style={{

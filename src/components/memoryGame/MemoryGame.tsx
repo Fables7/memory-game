@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { GridButton, CustomButton, GameDetails } from "..";
+import { GridButton, CustomButton, GameDetails, Modal } from "..";
 
 import { faFutbol, faMoon } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -55,6 +55,7 @@ const MemoryGame = () => {
   const [choiceOne, setChoiceOne] = useState<any>(null);
   const [choiceTwo, setChoiceTwo] = useState<any>(null);
   const [turns, setTurns] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const shuffleCards = () => {
     switch (theme) {
@@ -132,14 +133,27 @@ const MemoryGame = () => {
     setTurns((prevTurns) => prevTurns + 1);
   };
 
+  const openMenu = () => {
+    setMenuOpen(true);
+  };
+
   return (
     <div className="min-h-screen">
       <div className="flex justify-between items-center mt-5 mb-24">
         <h2 className="text-black">memory</h2>
-        <CustomButton className=" max-w-[78px] bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)]">
+        <CustomButton
+          className=" max-w-[78px] bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)]"
+          onClick={openMenu}
+        >
           Menu
         </CustomButton>
       </div>
+      {menuOpen && (
+        <Modal>
+          <h1>Hello</h1>
+          <button onClick={() => setMenuOpen(false)}>Close</button>
+        </Modal>
+      )}
       <div
         className="grid grid-cols-4 gap-5"
         style={{
