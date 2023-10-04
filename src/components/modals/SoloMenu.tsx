@@ -4,17 +4,22 @@ import { newGame } from "../../../store/memoryGame";
 
 interface SoloMenuProps {
   setOpen: (open: boolean) => void;
+  restart: () => void;
 }
 
-const SoloMenu = ({ setOpen }: SoloMenuProps) => {
+const SoloMenu = ({ setOpen, restart }: SoloMenuProps) => {
   const dispatch = useDispatch();
   const newGameHandler = () => {
     dispatch(newGame());
   };
+  const restartHandler = () => {
+    setOpen(false);
+    restart();
+  };
   return (
     <Modal setOpen={setOpen}>
       <div className="w-[327px] h-[224px] bg-[var(--menu-gray)] rounded-xl flex flex-col justify-around p-5">
-        <CustomButton primary className="h-[48px]">
+        <CustomButton onClick={restartHandler} primary className="h-[48px]">
           Restart
         </CustomButton>
         <CustomButton

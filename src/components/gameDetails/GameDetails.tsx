@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 interface GameDetailsProps {
   turns: number;
   gameActive: boolean;
+  seconds: number;
+  setSeconds: (seconds: number) => void;
 }
 
 interface DetailsContainerProps {
@@ -19,9 +21,12 @@ const DetailsContainer = ({ label, children }: DetailsContainerProps) => {
   );
 };
 
-const GameDetails = ({ turns, gameActive }: GameDetailsProps) => {
-  const [seconds, setSeconds] = useState(0);
-
+const GameDetails = ({
+  turns,
+  gameActive,
+  setSeconds,
+  seconds,
+}: GameDetailsProps) => {
   useEffect(() => {
     let interval: any = null;
 

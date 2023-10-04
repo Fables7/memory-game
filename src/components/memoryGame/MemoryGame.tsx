@@ -57,6 +57,7 @@ const MemoryGame = () => {
   const [turns, setTurns] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameActive, setGameActive] = useState(true);
+  const [seconds, setSeconds] = useState(0);
 
   const shuffleCards = () => {
     switch (theme) {
@@ -142,6 +143,12 @@ const MemoryGame = () => {
     setMenuOpen(true);
   };
 
+  const restartGame = () => {
+    setcards(shuffleCards());
+    setTurns(0);
+    setSeconds(0);
+  };
+
   return (
     <div className="min-h-screen">
       <div className="flex justify-between items-center mt-5 mb-24">
@@ -150,7 +157,7 @@ const MemoryGame = () => {
           Menu
         </CustomButton>
       </div>
-      {menuOpen && <SoloMenu setOpen={setMenuOpen} />}
+      {menuOpen && <SoloMenu setOpen={setMenuOpen} restart={restartGame} />}
       {/* {menuOpen && (
         <Modal setOpen={setMenuOpen}>
           <h1>hello</h1>
@@ -179,7 +186,12 @@ const MemoryGame = () => {
           );
         })}
       </div>
-      <GameDetails gameActive={gameActive} turns={turns} />
+      <GameDetails
+        gameActive={gameActive}
+        turns={turns}
+        seconds={seconds}
+        setSeconds={setSeconds}
+      />
     </div>
   );
 };
