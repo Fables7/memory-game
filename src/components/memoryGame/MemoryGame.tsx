@@ -146,10 +146,7 @@ const MemoryGame = () => {
     <div className="min-h-screen">
       <div className="flex justify-between items-center mt-5 mb-24">
         <h2 className="text-black">memory</h2>
-        <CustomButton
-          className=" max-w-[78px] bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)]"
-          onClick={openMenu}
-        >
+        <CustomButton primary className=" max-w-[78px] " onClick={openMenu}>
           Menu
         </CustomButton>
       </div>

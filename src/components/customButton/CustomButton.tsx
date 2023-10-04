@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { StyledCustomButton } from "./StyledCustomButton";
 
 interface CustomButtonProps {
   children: React.ReactNode;
@@ -8,6 +9,8 @@ interface CustomButtonProps {
   disabled?: boolean;
   active?: boolean;
   activeColor?: string;
+  primary?: boolean;
+  secondary?: boolean;
 }
 
 const CustomButton = (props: CustomButtonProps) => {
@@ -16,15 +19,34 @@ const CustomButton = (props: CustomButtonProps) => {
     props.className
   );
   return (
-    <button
+    <StyledCustomButton
+      active={props.active}
+      primary={props.primary}
+      secondary={props.secondary}
       type={props.type}
       onClick={props.onClick}
-      style={{ backgroundColor: props.active ? "var(--active)" : undefined }}
       className={rootClassName}
     >
       {props.children}
-    </button>
+    </StyledCustomButton>
   );
 };
 
 export default CustomButton;
+
+{
+  /* <button
+type={props.type}
+onClick={props.onClick}
+style={{
+  backgroundColor: props.active
+    ? "var(--menu-active)"
+    : props.primary
+    ? "var(--orange-accent)"
+    : undefined,
+}}
+className={rootClassName}
+>
+{props.children}
+</button> */
+}

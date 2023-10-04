@@ -88,10 +88,7 @@ const StartGameForm = () => {
             active={gridSize}
             setActive={setGridSize}
           />
-          <CustomButton
-            type="submit"
-            className="bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)] mt-auto h-[48px]"
-          >
+          <CustomButton type="submit" primary className="  mt-auto h-[48px]">
             Start Game
           </CustomButton>
         </form>
