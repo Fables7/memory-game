@@ -1,12 +1,14 @@
 import { Modal, CustomButton } from "..";
 import { newGame } from "../../../store/memoryGame";
 import useFormatTime from "@/hooks/useFormatTime";
+import { useSelector, useDispatch } from "react-redux";
 
 interface GameFinishedProps {
   setOpen: (open: boolean) => void;
   restart: () => void;
   timeElapsed?: number;
   movesTaken?: number;
+  players: any[];
 }
 
 interface InfoBoxProps {
@@ -39,10 +41,34 @@ const GameFinished = ({
   restart,
   movesTaken,
   timeElapsed,
+  players,
 }: GameFinishedProps) => {
+  const { numPlayers } = useSelector((state: any) => state.memoryGame);
+  const dispatch = useDispatch();
+
+  const checkWinner = () => {
+    const winningScore = Math.max(...players.map((player) => player.score));
+    const winners = players.filter((player) => player.score === winningScore);
+    console.log(winners);
+    return winners;
+  };
+
+  const displayTitle = () => {
+    if (numPlayers > 1) {
+      const winners = checkWinner();
+      if (winners.length === 1) {
+        return `Player ${winners[0].id + 1} Wins!`;
+      } else {
+        return "It's a tie!";
+      }
+    } else {
+      return "Game over! Here's how you got on...";
+    }
+  };
+
   return (
     <Modal setOpen={setOpen} className=" items-center h-[376px]">
-      <h3 className="text-black">You did it!</h3>
+      <h3 className="text-black">{displayTitle()}</h3>
       <p className="text-[0.875rem] mb-8 mt-2">
         {"Game over! Here's how you got on..."}
       </p>
@@ -51,7 +77,9 @@ const GameFinished = ({
       <CustomButton onClick={restart} className="mt-auto mb-3" primary>
         Restart
       </CustomButton>
-      <CustomButton secondary>Setup New Game</CustomButton>
+      <CustomButton onClick={() => dispatch(newGame())} secondary>
+        Setup New Game
+      </CustomButton>
     </Modal>
   );
 };

@@ -128,7 +128,7 @@ const MemoryGame = () => {
   const resetTurn = useCallback(() => {
     setChoiceOne(null);
     setChoiceTwo(null);
-    setTurns((prevTurns) => prevTurns + 1);
+    if (!numPlayers) setTurns((prevTurns) => prevTurns + 1);
     if (numPlayers > 1) {
       if (currentPlayer === numPlayers - 1) {
         setCurrentPlayer(0);
@@ -190,6 +190,7 @@ const MemoryGame = () => {
     setTurns(0);
     setSeconds(0);
     setGameFinished(false);
+    setPlayers(createPlayers());
   };
 
   return (
@@ -207,6 +208,7 @@ const MemoryGame = () => {
           restart={restartGame}
           timeElapsed={seconds}
           movesTaken={turns}
+          players={players}
         />
       )}
       <div
