@@ -7,3 +7,4 @@ export { default as Modal } from "./modal/Modal";
 
 // Modal
 export { default as SoloMenu } from "./modals/SoloMenu";
+export { default as GameFinished } from "./modals/GameFinished";

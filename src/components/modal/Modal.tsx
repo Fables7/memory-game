@@ -1,12 +1,18 @@
 import { useEffect, useRef } from "react";
+import clsx from "clsx";
 
 interface ModalProps {
   children: React.ReactNode;
   setOpen: (open: boolean) => void;
+  className?: string;
 }
 
-const Modal = ({ children, setOpen }: ModalProps) => {
+const Modal = ({ children, setOpen, className }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
+  const rootClassName = clsx(
+    "w-[327px] bg-[var(--menu-gray)] rounded-xl flex flex-col p-5",
+    className
+  );
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -21,7 +27,9 @@ const Modal = ({ children, setOpen }: ModalProps) => {
   }, [setOpen]);
   return (
     <div className=" w-full h-screen bg-black bg-opacity-50 backdrop-blur-sm fixed top-0 left-0 z-50 flex items-center justify-center">
-      <div ref={modalRef}>{children}</div>
+      <div className={rootClassName} ref={modalRef}>
+        {children}
+      </div>
     </div>
   );
 };

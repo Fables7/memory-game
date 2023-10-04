@@ -32,13 +32,13 @@ const GameDetails = ({
 
     if (gameActive) {
       interval = setInterval(() => {
-        setSeconds((seconds) => seconds + 1);
+        setSeconds(seconds + 1);
       }, 1000);
     } else if (!gameActive && seconds !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [gameActive, seconds]);
+  }, [gameActive, seconds, setSeconds]);
 
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;

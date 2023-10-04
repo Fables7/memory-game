@@ -1,7 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { GridButton, CustomButton, GameDetails, SoloMenu, Modal } from "..";
+import {
+  GridButton,
+  CustomButton,
+  GameDetails,
+  SoloMenu,
+  GameFinished,
+} from "..";
 
 import { faFutbol, faMoon } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -58,6 +64,7 @@ const MemoryGame = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameActive, setGameActive] = useState(true);
   const [seconds, setSeconds] = useState(0);
+  const [gameFinished, setGameFinished] = useState(false);
 
   const shuffleCards = () => {
     switch (theme) {
@@ -104,6 +111,7 @@ const MemoryGame = () => {
     choiceOne ? setChoiceTwo(choice) : setChoiceOne(choice);
   };
 
+  // handle choice
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.icon === choiceTwo.icon) {
@@ -123,12 +131,14 @@ const MemoryGame = () => {
     }
   }, [choiceOne, choiceTwo]);
 
+  // handle game finished
   useEffect(() => {
     if (cards.every((card: any) => card.matched)) {
-      console.log("you win");
+      setGameFinished(true);
     }
   }, [cards]);
 
+  //handle menu opening
   useEffect(() => {
     menuOpen ? setGameActive(false) : setGameActive(true);
   }, [menuOpen]);
@@ -158,11 +168,9 @@ const MemoryGame = () => {
         </CustomButton>
       </div>
       {menuOpen && <SoloMenu setOpen={setMenuOpen} restart={restartGame} />}
-      {/* {menuOpen && (
-        <Modal setOpen={setMenuOpen}>
-          <h1>hello</h1>
-        </Modal>
-      )} */}
+      {gameFinished && (
+        <GameFinished setOpen={setGameFinished} restart={restartGame} />
+      )}
       <div
         className="grid grid-cols-4 gap-5"
         style={{
