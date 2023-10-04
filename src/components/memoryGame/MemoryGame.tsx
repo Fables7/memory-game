@@ -56,6 +56,7 @@ const MemoryGame = () => {
   const [choiceTwo, setChoiceTwo] = useState<any>(null);
   const [turns, setTurns] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [gameActive, setGameActive] = useState(true);
 
   const shuffleCards = () => {
     switch (theme) {
@@ -127,6 +128,10 @@ const MemoryGame = () => {
     }
   }, [cards]);
 
+  useEffect(() => {
+    menuOpen ? setGameActive(false) : setGameActive(true);
+  }, [menuOpen]);
+
   const resetTurn = () => {
     setChoiceOne(null);
     setChoiceTwo(null);
@@ -177,7 +182,7 @@ const MemoryGame = () => {
           );
         })}
       </div>
-      <GameDetails turns={turns} />
+      <GameDetails gameActive={gameActive} turns={turns} />
     </div>
   );
 };

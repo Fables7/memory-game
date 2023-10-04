@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 interface GameDetailsProps {
   turns: number;
+  gameActive: boolean;
 }
 
 interface DetailsContainerProps {
@@ -18,32 +19,28 @@ const DetailsContainer = ({ label, children }: DetailsContainerProps) => {
   );
 };
 
-const GameDetails = ({ turns }: GameDetailsProps) => {
+const GameDetails = ({ turns, gameActive }: GameDetailsProps) => {
   const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(true);
-
-  const toggle = () => {
-    setIsActive(!isActive);
-  };
 
   useEffect(() => {
     let interval: any = null;
 
-    if (isActive) {
+    if (gameActive) {
       interval = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
       }, 1000);
-    } else if (!isActive && seconds !== 0) {
+    } else if (!gameActive && seconds !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds]);
+  }, [gameActive, seconds]);
 
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
 
   const formattedMinutes = String(minutes).padStart(2, "0");
   const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+
   return (
     <div className="text-black flex justify-between  w-full mt-32">
       <DetailsContainer label="Time">
