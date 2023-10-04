@@ -11,11 +11,12 @@ interface CustomButtonProps {
   activeColor?: string;
   primary?: boolean;
   secondary?: boolean;
+  option?: boolean;
 }
 
 const CustomButton = (props: CustomButtonProps) => {
   const rootClassName = clsx(
-    "h-[40px] bg-[var(--idle)] rounded-3xl w-full hover:bg-[var(--hover)]",
+    "h-[48px] bg-[var(--idle)] rounded-3xl w-full hover:bg-[var(--hover)]",
     props.className
   );
   return (
@@ -23,6 +24,7 @@ const CustomButton = (props: CustomButtonProps) => {
       active={props.active}
       primary={props.primary}
       secondary={props.secondary}
+      option={props.option}
       type={props.type}
       onClick={props.onClick}
       className={rootClassName}

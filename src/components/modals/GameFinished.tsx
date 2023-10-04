@@ -4,14 +4,38 @@ import { newGame } from "../../../store/memoryGame";
 interface GameFinishedProps {
   setOpen: (open: boolean) => void;
   restart: () => void;
+  timeElapsed?: number;
+  movesTaken?: number;
 }
 
-const GameFinished = ({ setOpen, restart }: GameFinishedProps) => {
+interface InfoBoxProps {
+  label: string;
+  value?: string;
+}
+
+const InfoBox = ({ label, value }: InfoBoxProps) => {
+  return (
+    <div className="h-[48px] bg-[var(--light-gray)] rounded-lg flex items-center px-6 justify-between">
+      <p className="text-[var(--text-gray)] text-[0.813rem]">{label}</p>
+      <p className="text-[var(--main-background)] text-[1.25rem]">{value}</p>
+    </div>
+  );
+};
+
+const GameFinished = ({
+  setOpen,
+  restart,
+  movesTaken,
+  timeElapsed,
+}: GameFinishedProps) => {
   return (
     <Modal setOpen={setOpen}>
-      <div>
-        <h1>Game finished</h1>
-      </div>
+      <h3 className="text-black">You did it!</h3>
+      <p>{"Game over! Here's how you got on..."}</p>
+      <InfoBox label="Time Elapsed" value={"1:53"} />
+      <InfoBox label="Moves Taken" value={"39 Moves"} />
+      <CustomButton primary>Restart</CustomButton>
+      <CustomButton secondary>Setup New Game</CustomButton>
     </Modal>
   );
 };

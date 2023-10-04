@@ -30,6 +30,7 @@ const OptionsContainer = ({
             key={index}
             onClick={onClickHandler(option)}
             type="button"
+            option
           >
             {option}
           </CustomButton>

@@ -64,7 +64,7 @@ const MemoryGame = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameActive, setGameActive] = useState(true);
   const [seconds, setSeconds] = useState(0);
-  const [gameFinished, setGameFinished] = useState(false);
+  const [gameFinished, setGameFinished] = useState(true);
 
   const shuffleCards = () => {
     switch (theme) {

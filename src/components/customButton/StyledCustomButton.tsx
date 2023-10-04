@@ -4,14 +4,16 @@ interface StyledCustomButtonProps {
   active?: boolean;
   primary?: boolean;
   secondary?: boolean;
+  option?: boolean;
 }
 
 const shouldForwardProp = (prop: string) =>
-  !["active", "primary", "secondary"].includes(prop);
+  !["active", "primary", "secondary", "option"].includes(prop);
 
 export const StyledCustomButton = styled.button.withConfig({
   shouldForwardProp,
 })<StyledCustomButtonProps>`
+  height: ${(props) => props.option && "40px"};
   background: ${(props) =>
     props.active
       ? "var(--menu-active)"
