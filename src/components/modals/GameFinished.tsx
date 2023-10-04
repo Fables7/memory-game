@@ -16,20 +16,38 @@ interface InfoBoxProps {
   timeElapsed?: number;
   pairs?: number;
   turns?: number;
+  winner?: boolean;
 }
 
-const InfoBox = ({ label, timeElapsed, pairs, turns }: InfoBoxProps) => {
+const InfoBox = ({
+  label,
+  timeElapsed,
+  pairs,
+  turns,
+  winner,
+}: InfoBoxProps) => {
   const time = useFormatTime(timeElapsed || 0);
   const handleValue = () => {
     if (timeElapsed) return time;
-    if (pairs) return `${pairs} pairs`;
+    if (pairs) return `${pairs} Pairs`;
     if (turns) return `${turns} turns`;
     else return null;
   };
   return (
-    <div className="h-[48px] bg-[var(--light-gray)] rounded-lg flex items-center px-6 justify-between w-full mb-3">
-      <p className="text-[var(--text-gray)] text-[0.813rem]">{label}</p>
-      <p className="text-[var(--main-background)] text-[1.25rem]">
+    <div
+      style={{ background: winner ? "var(--main-background)" : undefined }}
+      className="h-[48px] bg-[var(--light-gray)] rounded-lg flex items-center px-6 justify-between w-full mb-3"
+    >
+      <p
+        style={{ color: winner ? "white" : undefined }}
+        className="text-[var(--text-gray)] text-[0.813rem]"
+      >
+        {label}
+      </p>
+      <p
+        style={{ color: winner ? "white" : undefined }}
+        className="text-[var(--main-background)] text-[1.25rem]"
+      >
         {handleValue()}
       </p>
     </div>
@@ -49,13 +67,20 @@ const GameFinished = ({
   const checkWinner = () => {
     const winningScore = Math.max(...players.map((player) => player.score));
     const winners = players.filter((player) => player.score === winningScore);
+
+    winners.forEach((player) => {
+      player.winner = true;
+    });
+
+    players.sort((a, b) => b.score - a.score);
     console.log(winners);
-    return winners;
+    return [winners, players];
   };
+
+  const [winners, sortedPlayers] = checkWinner();
 
   const displayTitle = () => {
     if (numPlayers > 1) {
-      const winners = checkWinner();
       if (winners.length === 1) {
         return `Player ${winners[0].id + 1} Wins!`;
       } else {
@@ -72,8 +97,25 @@ const GameFinished = ({
       <p className="text-[0.875rem] mb-8 mt-2">
         {"Game over! Here's how you got on..."}
       </p>
-      <InfoBox label="Time Elapsed" timeElapsed={timeElapsed} />
-      <InfoBox label="Moves Taken" turns={movesTaken} />
+      {numPlayers > 1 ? (
+        <>
+          {sortedPlayers.map((player, index) => {
+            return (
+              <InfoBox
+                key={index}
+                label={`Player ${player.id + 1}`}
+                pairs={player.score}
+                winner={player.winner}
+              />
+            );
+          })}
+        </>
+      ) : (
+        <>
+          <InfoBox label="Time Elapsed" timeElapsed={timeElapsed} />
+          <InfoBox label="Moves Taken" turns={movesTaken} />
+        </>
+      )}
       <CustomButton onClick={restart} className="mt-auto mb-3" primary>
         Restart
       </CustomButton>

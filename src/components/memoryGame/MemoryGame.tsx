@@ -191,6 +191,7 @@ const MemoryGame = () => {
     setSeconds(0);
     setGameFinished(false);
     setPlayers(createPlayers());
+    setCurrentPlayer(0);
   };
 
   return (
