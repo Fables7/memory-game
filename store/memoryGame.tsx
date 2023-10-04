@@ -78,9 +78,15 @@ export const memoryGameSlice = createSlice({
       state.gameStarted = true;
     },
     endGame: (state) => {},
+    newGame: (state) => {
+      state.gameStarted = false;
+      state.theme = "";
+      state.numPlayers = 1;
+      state.gridSize = "";
+    },
   },
 });
 
-export const { startGame } = memoryGameSlice.actions;
+export const { startGame, newGame } = memoryGameSlice.actions;
 
 export default memoryGameSlice.reducer;

@@ -1,10 +1,16 @@
 import { Modal, CustomButton } from "..";
+import { useDispatch } from "react-redux";
+import { newGame } from "../../../store/memoryGame";
 
 interface SoloMenuProps {
   setOpen: (open: boolean) => void;
 }
 
 const SoloMenu = ({ setOpen }: SoloMenuProps) => {
+  const dispatch = useDispatch();
+  const newGameHandler = () => {
+    dispatch(newGame());
+  };
   return (
     <Modal setOpen={setOpen}>
       <div className="w-[327px] h-[224px] bg-[var(--menu-gray)] rounded-xl flex flex-col justify-around p-5">
@@ -12,12 +18,17 @@ const SoloMenu = ({ setOpen }: SoloMenuProps) => {
           Restart
         </CustomButton>
         <CustomButton
+          onClick={newGameHandler}
           secondary
           className="h-[48px] text-[var(--menu-active)]  hover:text-white"
         >
           New Game
         </CustomButton>
-        <CustomButton secondary className="h-[48px] ">
+        <CustomButton
+          onClick={() => setOpen(false)}
+          secondary
+          className="h-[48px] "
+        >
           Resume Game
         </CustomButton>
       </div>
