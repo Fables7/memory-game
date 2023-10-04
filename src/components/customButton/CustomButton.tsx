@@ -35,20 +35,3 @@ const CustomButton = (props: CustomButtonProps) => {
 };
 
 export default CustomButton;
-
-{
-  /* <button
-type={props.type}
-onClick={props.onClick}
-style={{
-  backgroundColor: props.active
-    ? "var(--menu-active)"
-    : props.primary
-    ? "var(--orange-accent)"
-    : undefined,
-}}
-className={rootClassName}
->
-{props.children}
-</button> */
-}

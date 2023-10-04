@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useFormatTime from "@/hooks/useFormatTime";
 
 interface GameDetailsProps {
   turns: number;
@@ -40,17 +41,11 @@ const GameDetails = ({
     return () => clearInterval(interval);
   }, [gameActive, seconds, setSeconds]);
 
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = seconds % 60;
-
-  const formattedMinutes = String(minutes).padStart(2, "0");
-  const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+  const time = useFormatTime(seconds);
 
   return (
     <div className="text-black flex justify-between  w-full mt-32">
-      <DetailsContainer label="Time">
-        {formattedMinutes}:{formattedSeconds}
-      </DetailsContainer>
+      <DetailsContainer label="Time">{time}</DetailsContainer>
       <DetailsContainer label="Moves">{turns}</DetailsContainer>
     </div>
   );

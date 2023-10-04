@@ -15,7 +15,7 @@ interface InfoBoxProps {
 
 const InfoBox = ({ label, value }: InfoBoxProps) => {
   return (
-    <div className="h-[48px] bg-[var(--light-gray)] rounded-lg flex items-center px-6 justify-between">
+    <div className="h-[48px] bg-[var(--light-gray)] rounded-lg flex items-center px-6 justify-between w-full mb-3">
       <p className="text-[var(--text-gray)] text-[0.813rem]">{label}</p>
       <p className="text-[var(--main-background)] text-[1.25rem]">{value}</p>
     </div>
@@ -29,12 +29,14 @@ const GameFinished = ({
   timeElapsed,
 }: GameFinishedProps) => {
   return (
-    <Modal setOpen={setOpen}>
+    <Modal setOpen={setOpen} className=" items-center h-[376px]">
       <h3 className="text-black">You did it!</h3>
       <p>{"Game over! Here's how you got on..."}</p>
       <InfoBox label="Time Elapsed" value={"1:53"} />
       <InfoBox label="Moves Taken" value={"39 Moves"} />
-      <CustomButton primary>Restart</CustomButton>
+      <CustomButton className="mt-auto mb-3" primary>
+        Restart
+      </CustomButton>
       <CustomButton secondary>Setup New Game</CustomButton>
     </Modal>
   );
