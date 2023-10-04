@@ -65,6 +65,7 @@ const MemoryGame = () => {
   const [gameActive, setGameActive] = useState(true);
   const [seconds, setSeconds] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
+  const [currentPlayer, setCurrentPlayer] = useState(0);
 
   // shuffle cards
   const shuffleCards = () => {
@@ -119,11 +120,23 @@ const MemoryGame = () => {
 
   const [cards, setcards] = useState<any>(shuffleCards());
   const [players, setPlayers] = useState<any>(createPlayers());
-  console.log(players);
 
   const handleChoice = (choice: any) => {
     choiceOne ? setChoiceTwo(choice) : setChoiceOne(choice);
   };
+
+  const resetTurn = useCallback(() => {
+    setChoiceOne(null);
+    setChoiceTwo(null);
+    setTurns((prevTurns) => prevTurns + 1);
+    if (numPlayers > 1) {
+      if (currentPlayer === numPlayers - 1) {
+        setCurrentPlayer(0);
+      } else {
+        setCurrentPlayer((prevPlayer) => prevPlayer + 1);
+      }
+    }
+  }, [numPlayers, currentPlayer]);
 
   // handle choice
   useEffect(() => {
@@ -138,12 +151,23 @@ const MemoryGame = () => {
             }
           });
         });
+        if (numPlayers > 1) {
+          setPlayers((prevPlayers: any) => {
+            return prevPlayers.map((player: any) => {
+              if (player.id === currentPlayer) {
+                return { ...player, score: player.score + 1 };
+              } else {
+                return player;
+              }
+            });
+          });
+        }
       }
       setTimeout(() => {
         resetTurn();
       }, 1000);
     }
-  }, [choiceOne, choiceTwo]);
+  }, [choiceOne, choiceTwo, currentPlayer, numPlayers, resetTurn]);
 
   // handle game finished
   useEffect(() => {
@@ -156,12 +180,6 @@ const MemoryGame = () => {
   useEffect(() => {
     menuOpen ? setGameActive(false) : setGameActive(true);
   }, [menuOpen]);
-
-  const resetTurn = () => {
-    setChoiceOne(null);
-    setChoiceTwo(null);
-    setTurns((prevTurns) => prevTurns + 1);
-  };
 
   const openMenu = () => {
     setMenuOpen(true);
@@ -220,6 +238,8 @@ const MemoryGame = () => {
         seconds={seconds}
         setSeconds={setSeconds}
         gameFinished={gameFinished}
+        players={players}
+        currentPlayer={currentPlayer}
       />
     </div>
   );

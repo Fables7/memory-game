@@ -8,15 +8,23 @@ interface GameDetailsProps {
   seconds: number;
   setSeconds: (seconds: number) => void;
   gameFinished?: boolean;
+  players?: Player[];
+  currentPlayer?: number;
 }
 
 interface DetailsContainerProps {
   label: string;
   children: React.ReactNode;
 }
+interface Player {
+  score: number;
+  id: number;
+}
 
 interface PlayerDetailsContainerProps {
   numPlayers: number;
+  players?: Player[];
+  currentPlayer?: number;
 }
 
 const DetailsContainer = ({ label, children }: DetailsContainerProps) => {
@@ -28,7 +36,40 @@ const DetailsContainer = ({ label, children }: DetailsContainerProps) => {
   );
 };
 
-const PlayerDetailsContainer = () => {};
+const PlayerDetailsContainer = ({
+  numPlayers,
+  players,
+  currentPlayer,
+}: PlayerDetailsContainerProps) => {
+  return (
+    <div className="grid grid-flow-col   w-full  gap-8">
+      {players?.map((player) => {
+        return (
+          <div
+            style={{
+              backgroundColor:
+                currentPlayer === player.id
+                  ? "var(--orange-accent)"
+                  : "var(--light-gray)",
+              color: currentPlayer === player.id ? "var(--white)" : undefined,
+            }}
+            className="h-[70px]  bg-[var(--light-gray)] flex flex-col items-center justify-center rounded-lg"
+            key={player.id}
+          >
+            <p
+              style={{
+                color: currentPlayer === player.id ? "var(--white)" : undefined,
+              }}
+            >
+              P{player.id + 1}
+            </p>
+            <h3>{player.score}</h3>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 const GameDetails = ({
   turns,
@@ -36,6 +77,8 @@ const GameDetails = ({
   setSeconds,
   seconds,
   gameFinished,
+  players,
+  currentPlayer,
 }: GameDetailsProps) => {
   const { numPlayers } = useSelector((state: any) => state.memoryGame);
   useEffect(() => {
@@ -63,7 +106,11 @@ const GameDetails = ({
           <DetailsContainer label="Moves">{turns}</DetailsContainer>
         </>
       ) : (
-        <div></div>
+        <PlayerDetailsContainer
+          numPlayers={numPlayers}
+          players={players}
+          currentPlayer={currentPlayer}
+        />
       )}
     </div>
   );
