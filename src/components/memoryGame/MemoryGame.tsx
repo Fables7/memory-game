@@ -229,7 +229,11 @@ const MemoryGame = () => {
               flipped={card === choiceOne || card === choiceTwo}
               matched={card.matched}
               theme={theme}
-              disabled={choiceOne && choiceTwo}
+              disabled={
+                (choiceOne && choiceTwo) ||
+                card.matched ||
+                card.id === choiceOne?.id
+              }
               gridSize={gridSize}
             />
           );
