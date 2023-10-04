@@ -128,7 +128,10 @@ const MemoryGame = () => {
   const resetTurn = useCallback(() => {
     setChoiceOne(null);
     setChoiceTwo(null);
-    if (!numPlayers) setTurns((prevTurns) => prevTurns + 1);
+    if (numPlayers > 1) {
+      return;
+    } else setTurns((prevTurns) => prevTurns + 1);
+
     if (numPlayers > 1) {
       if (currentPlayer === numPlayers - 1) {
         setCurrentPlayer(0);

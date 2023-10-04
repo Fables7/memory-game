@@ -29,7 +29,7 @@ const InfoBox = ({
   const time = useFormatTime(timeElapsed || 0);
   const handleValue = () => {
     if (timeElapsed) return time;
-    if (pairs) return `${pairs} Pairs`;
+    if (pairs?.toString()) return `${pairs} Pairs`;
     if (turns) return `${turns} turns`;
     else return null;
   };
@@ -43,6 +43,7 @@ const InfoBox = ({
         className="text-[var(--text-gray)] text-[0.813rem]"
       >
         {label}
+        {winner && " (Winner!)"}
       </p>
       <p
         style={{ color: winner ? "white" : undefined }}
@@ -73,7 +74,6 @@ const GameFinished = ({
     });
 
     players.sort((a, b) => b.score - a.score);
-    console.log(winners);
     return [winners, players];
   };
 
@@ -87,14 +87,14 @@ const GameFinished = ({
         return "It's a tie!";
       }
     } else {
-      return "Game over! Here's how you got on...";
+      return "You did it!";
     }
   };
 
   return (
-    <Modal setOpen={setOpen} className=" items-center h-[376px]">
+    <Modal setOpen={setOpen} className=" items-center min-h-[376px]">
       <h3 className="text-black">{displayTitle()}</h3>
-      <p className="text-[0.875rem] mb-8 mt-2">
+      <p className="text-[0.875rem] mb-5 mt-2">
         {"Game over! Here's how you got on..."}
       </p>
       {numPlayers > 1 ? (
