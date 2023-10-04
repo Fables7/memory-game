@@ -6,6 +6,7 @@ interface GameDetailsProps {
   gameActive: boolean;
   seconds: number;
   setSeconds: (seconds: number) => void;
+  gameFinished?: boolean;
 }
 
 interface DetailsContainerProps {
@@ -27,11 +28,12 @@ const GameDetails = ({
   gameActive,
   setSeconds,
   seconds,
+  gameFinished,
 }: GameDetailsProps) => {
   useEffect(() => {
     let interval: any = null;
 
-    if (gameActive) {
+    if (gameActive && !gameFinished) {
       interval = setInterval(() => {
         setSeconds(seconds + 1);
       }, 1000);
@@ -39,7 +41,7 @@ const GameDetails = ({
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [gameActive, seconds, setSeconds]);
+  }, [gameActive, gameFinished, seconds, setSeconds]);
 
   const time = useFormatTime(seconds);
 

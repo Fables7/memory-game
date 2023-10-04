@@ -64,7 +64,7 @@ const MemoryGame = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [gameActive, setGameActive] = useState(true);
   const [seconds, setSeconds] = useState(0);
-  const [gameFinished, setGameFinished] = useState(true);
+  const [gameFinished, setGameFinished] = useState(false);
 
   const shuffleCards = () => {
     switch (theme) {
@@ -169,7 +169,12 @@ const MemoryGame = () => {
       </div>
       {menuOpen && <SoloMenu setOpen={setMenuOpen} restart={restartGame} />}
       {gameFinished && (
-        <GameFinished setOpen={setGameFinished} restart={restartGame} />
+        <GameFinished
+          setOpen={setGameFinished}
+          restart={restartGame}
+          timeElapsed={seconds}
+          movesTaken={turns}
+        />
       )}
       <div
         className="grid grid-cols-4 gap-5"
@@ -199,6 +204,7 @@ const MemoryGame = () => {
         turns={turns}
         seconds={seconds}
         setSeconds={setSeconds}
+        gameFinished={gameFinished}
       />
     </div>
   );
