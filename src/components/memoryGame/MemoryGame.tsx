@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import {
   GridButton,
@@ -65,8 +65,11 @@ const MemoryGame = () => {
   const [gameActive, setGameActive] = useState(true);
   const [seconds, setSeconds] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
+  const [cards, setcards] = useState<any>([]);
+  const [players, setPlayers] = useState<any>([]);
 
-  const shuffleCards = () => {
+  // shuffle cards
+  const shuffleCards = useCallback(() => {
     switch (theme) {
       case "Numbers":
         if (gridSize === "4x4") {
@@ -103,13 +106,27 @@ const MemoryGame = () => {
             }));
         }
     }
-  };
+  }, [gridSize, theme]);
 
-  const [cards, setcards] = useState<any>(shuffleCards());
+  // create players
+  const createPlayers = useCallback(() => {
+    const players = new Array(numPlayers).fill(0).map((_, i) => {
+      return {
+        score: 0,
+        id: i,
+      };
+    });
+    setPlayers(players);
+  }, [numPlayers]);
 
   const handleChoice = (choice: any) => {
     choiceOne ? setChoiceTwo(choice) : setChoiceOne(choice);
   };
+
+  useEffect(() => {
+    setcards(shuffleCards());
+    if (numPlayers > 1) createPlayers();
+  }, [createPlayers, numPlayers, shuffleCards]);
 
   // handle choice
   useEffect(() => {
