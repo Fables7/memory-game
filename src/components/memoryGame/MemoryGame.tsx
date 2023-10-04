@@ -65,11 +65,9 @@ const MemoryGame = () => {
   const [gameActive, setGameActive] = useState(true);
   const [seconds, setSeconds] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
-  const [cards, setcards] = useState<any>([]);
-  const [players, setPlayers] = useState<any>([]);
 
   // shuffle cards
-  const shuffleCards = useCallback(() => {
+  const shuffleCards = () => {
     switch (theme) {
       case "Numbers":
         if (gridSize === "4x4") {
@@ -106,27 +104,26 @@ const MemoryGame = () => {
             }));
         }
     }
-  }, [gridSize, theme]);
+  };
 
   // create players
-  const createPlayers = useCallback(() => {
+  const createPlayers = () => {
     const players = new Array(numPlayers).fill(0).map((_, i) => {
       return {
         score: 0,
         id: i,
       };
     });
-    setPlayers(players);
-  }, [numPlayers]);
+    return players;
+  };
+
+  const [cards, setcards] = useState<any>(shuffleCards());
+  const [players, setPlayers] = useState<any>(createPlayers());
+  console.log(players);
 
   const handleChoice = (choice: any) => {
     choiceOne ? setChoiceTwo(choice) : setChoiceOne(choice);
   };
-
-  useEffect(() => {
-    setcards(shuffleCards());
-    if (numPlayers > 1) createPlayers();
-  }, [createPlayers, numPlayers, shuffleCards]);
 
   // handle choice
   useEffect(() => {
