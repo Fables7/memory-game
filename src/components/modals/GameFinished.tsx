@@ -43,10 +43,12 @@ const GameFinished = ({
   return (
     <Modal setOpen={setOpen} className=" items-center h-[376px]">
       <h3 className="text-black">You did it!</h3>
-      <p>{"Game over! Here's how you got on..."}</p>
+      <p className="text-[0.875rem] mb-8 mt-2">
+        {"Game over! Here's how you got on..."}
+      </p>
       <InfoBox label="Time Elapsed" timeElapsed={timeElapsed} />
       <InfoBox label="Moves Taken" turns={movesTaken} />
-      <CustomButton className="mt-auto mb-3" primary>
+      <CustomButton onClick={restart} className="mt-auto mb-3" primary>
         Restart
       </CustomButton>
       <CustomButton secondary>Setup New Game</CustomButton>

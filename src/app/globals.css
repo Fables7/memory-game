@@ -51,6 +51,7 @@ h3 {
 
 p {
   font-size: 1.125rem;
+  color: var(--text-gray);
 }
 
 .game-number {

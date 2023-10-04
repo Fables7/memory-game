@@ -157,6 +157,7 @@ const MemoryGame = () => {
     setcards(shuffleCards());
     setTurns(0);
     setSeconds(0);
+    setGameFinished(false);
   };
 
   return (
