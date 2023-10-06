@@ -64,7 +64,7 @@ const StartGameForm = () => {
     console.log("pressed");
   };
   return (
-    <div className="flex flex-col items-center pt-24">
+    <div className="flex flex-col items-center pt-24  ">
       <h1 className="text-white mb-12">memory</h1>
 
       <div className="  min-w-[327px] h-[386px] bg-[var(--white)] rounded-lg p-5 ">
