@@ -10,7 +10,7 @@ export default function Home() {
       style={{
         background: gameStarted ? "var(--white)" : "var(--main-background)",
       }}
-      className="flex min-h-screen flex-col items-center  px-7"
+      className="flex min-h-screen flex-col items-center  px-7 pb-6 box-border"
     >
       {!gameStarted ? <StartGameForm /> : <MemoryGame />}
     </main>

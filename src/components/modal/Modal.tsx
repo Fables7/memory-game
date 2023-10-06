@@ -11,7 +11,7 @@ interface ModalProps {
 const Modal = ({ children, setOpen, className, style }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const rootClassName = clsx(
-    "w-[327px] bg-[var(--menu-gray)] rounded-xl flex flex-col p-5",
+    "w-[327px] md:w-[654px] bg-[var(--menu-gray)] rounded-xl flex flex-col p-5 md:p-12",
     className
   );
 

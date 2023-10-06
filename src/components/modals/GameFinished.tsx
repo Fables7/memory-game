@@ -36,18 +36,18 @@ const InfoBox = ({
   return (
     <div
       style={{ background: winner ? "var(--main-background)" : undefined }}
-      className="h-[48px] bg-[var(--light-gray)] rounded-lg flex items-center px-6 justify-between w-full mb-3"
+      className="h-[48px] md:h-[72px] bg-[var(--light-gray)] rounded-lg flex items-center px-6 justify-between w-full mb-3"
     >
       <p
         style={{ color: winner ? "white" : undefined }}
-        className="text-[var(--text-gray)] text-[0.813rem]"
+        className="text-[var(--text-gray)] text-[0.813rem] md:text-[1.125rem]"
       >
         {label}
         {winner && " (Winner!)"}
       </p>
       <p
         style={{ color: winner ? "white" : undefined }}
-        className="text-[var(--main-background)] text-[1.25rem]"
+        className="text-[var(--main-background)] text-[1.25rem] md:text-[2rem]"
       >
         {handleValue()}
       </p>
@@ -92,13 +92,16 @@ const GameFinished = ({
   };
 
   return (
-    <Modal setOpen={setOpen} className=" items-center min-h-[376px]">
-      <h3 className="text-black">{displayTitle()}</h3>
-      <p className="text-[0.875rem] mb-5 mt-2">
+    <Modal
+      setOpen={setOpen}
+      className=" items-center min-h-[376px] md:min-h-[510px]"
+    >
+      <h3 className="text-black md:text-[3rem]">{displayTitle()}</h3>
+      <p className="text-[0.875rem] md:text-[1.125rem] mb-5 mt-2">
         {"Game over! Here's how you got on..."}
       </p>
       {numPlayers > 1 ? (
-        <>
+        <div className="w-full mb-8">
           {sortedPlayers.map((player, index) => {
             return (
               <InfoBox
@@ -109,19 +112,21 @@ const GameFinished = ({
               />
             );
           })}
-        </>
+        </div>
       ) : (
         <>
           <InfoBox label="Time Elapsed" timeElapsed={timeElapsed} />
           <InfoBox label="Moves Taken" turns={movesTaken} />
         </>
       )}
-      <CustomButton onClick={restart} className="mt-auto mb-3" primary>
-        Restart
-      </CustomButton>
-      <CustomButton onClick={() => dispatch(newGame())} secondary>
-        Setup New Game
-      </CustomButton>
+      <div className="w-full mt-auto md:grid  md:grid-cols-2 md:gap-5">
+        <CustomButton onClick={restart} className=" mb-3" primary menu>
+          Restart
+        </CustomButton>
+        <CustomButton onClick={() => dispatch(newGame())} secondary menu>
+          Setup New Game
+        </CustomButton>
+      </div>
     </Modal>
   );
 };

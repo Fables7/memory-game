@@ -201,7 +201,7 @@ const MemoryGame = () => {
   };
 
   return (
-    <div className="min-h-screen md:w-[689px] items-center flex-col flex">
+    <div className="min-h-screen md:w-[689px] lg:w-[1110px] items-center flex-col flex">
       <div className="flex justify-between items-center mt-5 mb-24 w-full">
         <h2 className="text-black">memory</h2>
         <div className="hidden md:flex ">
