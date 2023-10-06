@@ -40,8 +40,9 @@ const PlayerDetailsContainer = ({
   players,
   currentPlayer,
 }: PlayerDetailsContainerProps) => {
+  const isTabletOrLarger = window.innerWidth >= 768;
   return (
-    <div className="grid grid-flow-col   w-full  gap-8">
+    <div className="grid grid-flow-col   w-full  gap-6">
       {players?.map((player) => {
         return (
           <div
@@ -52,17 +53,19 @@ const PlayerDetailsContainer = ({
                   : "var(--light-gray)",
               color: currentPlayer === player.id ? "var(--white)" : undefined,
             }}
-            className="h-[70px]  bg-[var(--light-gray)] flex flex-col items-center justify-center rounded-lg"
+            className="h-[70px] md:h-[80px]  bg-[var(--light-gray)] flex flex-col items-center justify-center md:items-start px-4 rounded-lg"
             key={player.id}
           >
             <p
               style={{
                 color: currentPlayer === player.id ? "var(--white)" : undefined,
               }}
+              className="text-[0.938rem]"
             >
-              P{player.id + 1}
+              {isTabletOrLarger ? "Player " : "P"}
+              {player.id + 1}
             </p>
-            <h3>{player.score}</h3>
+            <h3 className="md:text-[1.5rem]">{player.score}</h3>
           </div>
         );
       })}
@@ -98,12 +101,12 @@ const GameDetails = ({
   const time = useFormatTime(seconds);
 
   return (
-    <div className="text-black flex justify-between  w-full mt-32">
+    <div className="text-black flex justify-center w-full mt-32">
       {numPlayers === 1 ? (
-        <>
+        <div className="flex justify-between w-full md:w-[532px]">
           <DetailsContainer label="Time">{time}</DetailsContainer>
           <DetailsContainer label="Moves">{turns}</DetailsContainer>
-        </>
+        </div>
       ) : (
         <PlayerDetailsContainer
           numPlayers={numPlayers}
