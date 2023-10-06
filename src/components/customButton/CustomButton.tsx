@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { StyledCustomButton } from "./StyledCustomButton";
 
 interface CustomButtonProps {
   children: React.ReactNode;
@@ -17,20 +16,17 @@ interface CustomButtonProps {
 const CustomButton = (props: CustomButtonProps) => {
   const rootClassName = clsx(
     "h-[48px] bg-[var(--idle)] rounded-3xl w-full hover:bg-[var(--hover)]",
+    props.option && "h-[40px]",
+    props.active && "bg-[var(--menu-active)]",
+    props.primary && "bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)]",
+    props.secondary &&
+      "bg-[var(--light-gray)] text-[var(--menu-active)]  hover:text-white ",
     props.className
   );
   return (
-    <StyledCustomButton
-      active={props.active}
-      primary={props.primary}
-      secondary={props.secondary}
-      option={props.option}
-      type={props.type}
-      onClick={props.onClick}
-      className={rootClassName}
-    >
+    <button type={props.type} onClick={props.onClick} className={rootClassName}>
       {props.children}
-    </StyledCustomButton>
+    </button>
   );
 };
 

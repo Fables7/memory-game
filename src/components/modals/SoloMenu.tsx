@@ -21,11 +21,7 @@ const SoloMenu = ({ setOpen, restart }: SoloMenuProps) => {
       <CustomButton onClick={restartHandler} primary className="h-[48px]">
         Restart
       </CustomButton>
-      <CustomButton
-        onClick={newGameHandler}
-        secondary
-        className="h-[48px] text-[var(--menu-active)]  hover:text-white"
-      >
+      <CustomButton onClick={newGameHandler} secondary className="h-[48px] ">
         New Game
       </CustomButton>
       <CustomButton

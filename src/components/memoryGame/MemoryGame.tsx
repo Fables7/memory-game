@@ -67,7 +67,6 @@ const MemoryGame = () => {
   const [gameFinished, setGameFinished] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState(0);
 
-  console.log(numPlayers, "numPlayers");
   // shuffle cards
   const shuffleCards = () => {
     switch (theme) {
@@ -135,7 +134,6 @@ const MemoryGame = () => {
       if (currentPlayer === numPlayers - 1) {
         setCurrentPlayer(0);
       } else {
-        console.log("next player");
         setCurrentPlayer((prevPlayer) => prevPlayer + 1);
       }
     }

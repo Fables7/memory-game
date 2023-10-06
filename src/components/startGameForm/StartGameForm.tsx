@@ -22,7 +22,7 @@ const OptionsContainer = ({
   };
   return (
     <>
-      <label className="mb-2">{label}</label>
+      <label className="mb-2 md:text-xl ">{label}</label>
       <div className="grid grid-flow-col gap-2 mb-5">
         {options.map((option, index) => (
           <CustomButton
@@ -67,7 +67,7 @@ const StartGameForm = () => {
     <div className="flex flex-col items-center pt-24  ">
       <h1 className="text-white mb-12">memory</h1>
 
-      <div className="  min-w-[327px] h-[386px] bg-[var(--white)] rounded-lg p-5 ">
+      <div className="  min-w-[327px] h-[386px] md:min-w-[654px] md:h-[559px] bg-[var(--white)] rounded-lg p-5 md:p-12 ">
         <form className="flex flex-col h-full" onSubmit={formSubmitHandler}>
           <OptionsContainer
             label="Select Theme"
