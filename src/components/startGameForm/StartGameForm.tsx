@@ -22,7 +22,7 @@ const OptionsContainer = ({
   };
   return (
     <>
-      <label className="mb-2 md:text-xl ">{label}</label>
+      <label className="mb-2 md:mb-6 md:text-xl ">{label}</label>
       <div className="grid grid-flow-col gap-2 mb-5">
         {options.map((option, index) => (
           <CustomButton

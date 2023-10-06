@@ -15,8 +15,8 @@ interface CustomButtonProps {
 
 const CustomButton = (props: CustomButtonProps) => {
   const rootClassName = clsx(
-    "h-[48px] bg-[var(--idle)] rounded-3xl w-full hover:bg-[var(--hover)]",
-    props.option && "h-[40px]",
+    "h-[48px] md:h-[70px] md:text-[2rem]  bg-[var(--idle)] rounded-3xl w-full hover:bg-[var(--hover)]",
+    props.option && "h-[40px] md:h-[51px] md:text-[1.625rem]  ",
     props.active && "bg-[var(--menu-active)]",
     props.primary && "bg-[var(--orange-accent)] hover:bg-[var(--orange-hover)]",
     props.secondary &&
