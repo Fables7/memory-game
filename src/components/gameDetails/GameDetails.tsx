@@ -29,7 +29,7 @@ interface PlayerDetailsContainerProps {
 
 const DetailsContainer = ({ label, children }: DetailsContainerProps) => {
   return (
-    <div className="h-[70px] w-[151px] bg-[var(--light-gray)] flex flex-col items-center justify-center rounded-lg text-[1.5rem]">
+    <div className="h-[70px] w-[151px] md:w-[255px] bg-[var(--light-gray)] flex flex-col md:flex-row items-center justify-center md:justify-between px-6 box-border rounded-lg text-[1.5rem]">
       <label className="text-[0.938rem]">{label}</label>
       {children}
     </div>
@@ -37,7 +37,6 @@ const DetailsContainer = ({ label, children }: DetailsContainerProps) => {
 };
 
 const PlayerDetailsContainer = ({
-  numPlayers,
   players,
   currentPlayer,
 }: PlayerDetailsContainerProps) => {

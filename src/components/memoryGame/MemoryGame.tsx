@@ -54,6 +54,9 @@ const iconArrays = [
   faAndroid,
 ];
 
+import { newGame } from "../../../store/memoryGame";
+import { useDispatch } from "react-redux";
+
 const MemoryGame = () => {
   const { theme, numPlayers, gridSize } = useSelector(
     (state: any) => state.memoryGame
@@ -66,6 +69,8 @@ const MemoryGame = () => {
   const [seconds, setSeconds] = useState(0);
   const [gameFinished, setGameFinished] = useState(false);
   const [currentPlayer, setCurrentPlayer] = useState(0);
+
+  const dispatch = useDispatch();
 
   // shuffle cards
   const shuffleCards = () => {
@@ -196,10 +201,23 @@ const MemoryGame = () => {
   };
 
   return (
-    <div className="min-h-screen md:w-[689px]">
-      <div className="flex justify-between items-center mt-5 mb-24">
+    <div className="min-h-screen md:w-[689px] items-center flex-col flex">
+      <div className="flex justify-between items-center mt-5 mb-24 w-full">
         <h2 className="text-black">memory</h2>
-        <CustomButton primary className=" max-w-[78px] " onClick={openMenu}>
+        <div className="hidden md:flex ">
+          <CustomButton onClick={restartGame} menu className="mr-4" primary>
+            Restart
+          </CustomButton>
+          <CustomButton onClick={() => dispatch(newGame())} menu secondary>
+            New Game
+          </CustomButton>
+        </div>
+        <CustomButton
+          primary
+          option
+          className=" max-w-[78px] md:hidden sm:inline "
+          onClick={openMenu}
+        >
           Menu
         </CustomButton>
       </div>
@@ -214,7 +232,7 @@ const MemoryGame = () => {
         />
       )}
       <div
-        className="grid grid-cols-4 gap-5"
+        className="grid grid-cols-4 gap-5 md:w-[532px] justify-items-center "
         style={{
           gridTemplateColumns: `repeat(${
             gridSize === "4x4" ? 4 : 6
