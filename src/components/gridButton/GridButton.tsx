@@ -12,6 +12,7 @@ const GridButton = ({
 }: any) => {
   const rootClassName = clsx(
     "rounded-full h-[73px] w-[73px] ",
+    !flipped && !matched && "hover:bg-[var(--hover)]",
     gridSize === "4x4"
       ? "h-[73px] w-[73px] md:h-[118px] md:w-[118px]"
       : "h-[47px] h-[47px]",
