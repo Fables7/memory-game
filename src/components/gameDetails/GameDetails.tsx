@@ -46,26 +46,42 @@ const PlayerDetailsContainer = ({
       {players?.map((player) => {
         return (
           <div
-            style={{
-              backgroundColor:
-                currentPlayer === player.id
-                  ? "var(--orange-accent)"
-                  : "var(--light-gray)",
-              color: currentPlayer === player.id ? "var(--white)" : undefined,
-            }}
-            className="h-[70px] md:h-[80px]  bg-[var(--light-gray)] flex flex-col items-center justify-center md:items-start px-4 rounded-lg"
+            className="flex flex-col items-center justify-end"
             key={player.id}
           >
-            <p
+            {currentPlayer === player.id && (
+              <div
+                style={{
+                  width: 0,
+                  height: 0,
+                  borderLeft: "13px solid transparent",
+                  borderRight: "13px solid transparent",
+                  borderBottom: "12px solid var(--orange-accent)",
+                }}
+              ></div>
+            )}
+            <div
               style={{
+                backgroundColor:
+                  currentPlayer === player.id
+                    ? "var(--orange-accent)"
+                    : "var(--light-gray)",
                 color: currentPlayer === player.id ? "var(--white)" : undefined,
               }}
-              className="text-[0.938rem]"
+              className="h-[70px] md:h-[80px]  bg-[var(--light-gray)] flex flex-col items-center justify-center md:items-start px-4 rounded-lg w-full"
             >
-              {isTabletOrLarger ? "Player " : "P"}
-              {player.id + 1}
-            </p>
-            <h3 className="md:text-[1.5rem]">{player.score}</h3>
+              <p
+                style={{
+                  color:
+                    currentPlayer === player.id ? "var(--white)" : undefined,
+                }}
+                className="text-[0.938rem]"
+              >
+                {isTabletOrLarger ? "Player " : "P"}
+                {player.id + 1}
+              </p>
+              <h3 className="md:text-[1.5rem]">{player.score}</h3>
+            </div>
           </div>
         );
       })}
