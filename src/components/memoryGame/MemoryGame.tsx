@@ -149,6 +149,7 @@ const MemoryGame = () => {
     const delay = gameFinished ? 0 : 1000;
     if (choiceOne && choiceTwo) {
       if (choiceOne.icon === choiceTwo.icon) {
+        resetTurn();
         setcards((prevcards: any) => {
           return prevcards.map((card: any) => {
             if (card.icon === choiceOne.icon) {
@@ -169,6 +170,7 @@ const MemoryGame = () => {
             });
           });
         }
+        return;
       }
       setTimeout(() => {
         resetTurn();
