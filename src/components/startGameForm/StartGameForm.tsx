@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CustomButton } from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { startGame } from "../../../store/memoryGame";
+import clsx from "clsx";
 
 interface OptionsContainerProps {
   options: string[];
@@ -20,10 +21,15 @@ const OptionsContainer = ({
   const onClickHandler = (option: string) => () => {
     setActive(option);
   };
+
+  const rootClassName = clsx(
+    "grid  gap-3 md:gap-8 mb-5",
+    `grid-cols-${options.length}`
+  );
   return (
     <>
       <label className="mb-2 md:mb-4 md:text-xl ">{label}</label>
-      <div className="grid grid-flow-col gap-3 md:gap-8 mb-5">
+      <div className={rootClassName}>
         {options.map((option, index) => (
           <CustomButton
             active={option === active}
