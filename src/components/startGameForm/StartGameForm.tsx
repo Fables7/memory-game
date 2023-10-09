@@ -23,7 +23,7 @@ const OptionsContainer = ({
   };
 
   const rootClassName = clsx(
-    "grid  gap-3 md:gap-8 mb-5",
+    "grid gap-3 md:gap-8 mb-5",
     `grid-cols-${options.length}`
   );
   return (
