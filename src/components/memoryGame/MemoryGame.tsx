@@ -224,7 +224,6 @@ const MemoryGame = () => {
       {menuOpen && <SoloMenu setOpen={setMenuOpen} restart={restartGame} />}
       {gameFinished && (
         <GameFinished
-          setOpen={setGameFinished}
           restart={restartGame}
           timeElapsed={seconds}
           movesTaken={turns}

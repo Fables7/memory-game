@@ -4,7 +4,6 @@ import useFormatTime from "@/hooks/useFormatTime";
 import { useSelector, useDispatch } from "react-redux";
 
 interface GameFinishedProps {
-  setOpen: (open: boolean) => void;
   restart: () => void;
   timeElapsed?: number;
   movesTaken?: number;
@@ -56,7 +55,6 @@ const InfoBox = ({
 };
 
 const GameFinished = ({
-  setOpen,
   restart,
   movesTaken,
   timeElapsed,
@@ -92,10 +90,7 @@ const GameFinished = ({
   };
 
   return (
-    <Modal
-      setOpen={setOpen}
-      className=" items-center min-h-[376px] md:min-h-[510px]"
-    >
+    <Modal className=" items-center min-h-[376px] md:min-h-[510px]">
       <h3 className="text-black md:text-[3rem]">{displayTitle()}</h3>
       <p className="text-[0.875rem] md:text-[1.125rem] mb-5 mt-2">
         {"Game over! Here's how you got on..."}
