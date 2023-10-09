@@ -29,8 +29,8 @@ interface PlayerDetailsContainerProps {
 
 const DetailsContainer = ({ label, children }: DetailsContainerProps) => {
   return (
-    <div className="h-[70px] w-[151px] md:w-[255px] bg-[var(--light-gray)] flex flex-col md:flex-row items-center justify-center md:justify-between px-6 box-border rounded-lg text-[1.5rem]">
-      <label className="text-[0.938rem]">{label}</label>
+    <div className="h-[70px] w-[151px] md:w-[255px] bg-[var(--light-gray)] flex flex-col md:flex-row items-center justify-center md:justify-between px-6 box-border rounded-lg text-[1.5rem] lg:text-[2rem]">
+      <label className="text-[0.938rem] lg:text-[1.125rem]">{label}</label>
       {children}
     </div>
   );
@@ -68,19 +68,21 @@ const PlayerDetailsContainer = ({
                     : "var(--light-gray)",
                 color: currentPlayer === player.id ? "var(--white)" : undefined,
               }}
-              className="h-[70px] md:h-[80px]  bg-[var(--light-gray)] flex flex-col items-center justify-center md:items-start px-4 rounded-lg w-full"
+              className="h-[70px] md:h-[80px]  bg-[var(--light-gray)] flex flex-col items-center justify-center md:items-start px-4 rounded-lg w-full lg:flex-row lg:items-center lg:justify-between"
             >
               <p
                 style={{
                   color:
                     currentPlayer === player.id ? "var(--white)" : undefined,
                 }}
-                className="text-[0.938rem]"
+                className="text-[0.938rem] lg:text-[1.125rem]"
               >
                 {isTabletOrLarger ? "Player " : "P"}
                 {player.id + 1}
               </p>
-              <h3 className="md:text-[1.5rem]">{player.score}</h3>
+              <h3 className="md:text-[1.5rem] lg:text-[2rem]">
+                {player.score}
+              </h3>
             </div>
           </div>
         );
@@ -117,7 +119,7 @@ const GameDetails = ({
   const time = useFormatTime(seconds);
 
   return (
-    <div className="text-black flex justify-center w-full mt-32">
+    <div className="text-black flex justify-center w-full mt-24">
       {numPlayers === 1 ? (
         <div className="flex justify-between w-full md:w-[532px]">
           <DetailsContainer label="Time">{time}</DetailsContainer>

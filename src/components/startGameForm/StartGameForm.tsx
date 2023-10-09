@@ -22,8 +22,8 @@ const OptionsContainer = ({
   };
   return (
     <>
-      <label className="mb-2 md:mb-6 md:text-xl ">{label}</label>
-      <div className="grid grid-flow-col gap-2 mb-5">
+      <label className="mb-2 md:mb-4 md:text-xl ">{label}</label>
+      <div className="grid grid-flow-col gap-3 md:gap-8 mb-5">
         {options.map((option, index) => (
           <CustomButton
             active={option === active}
