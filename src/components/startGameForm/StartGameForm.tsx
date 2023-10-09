@@ -12,6 +12,15 @@ interface OptionsContainerProps {
   label: string;
 }
 
+type GridClasses = {
+  [key: number]: string;
+};
+
+const gridClasses: GridClasses = {
+  2: "grid-cols-2",
+  4: "grid-cols-4",
+};
+
 const OptionsContainer = ({
   options,
   setActive,
@@ -24,7 +33,7 @@ const OptionsContainer = ({
 
   const rootClassName = clsx(
     "grid gap-3 md:gap-8 mb-5",
-    `grid-cols-${options.length}`
+    gridClasses[options.length]
   );
   return (
     <>
