@@ -146,6 +146,7 @@ const MemoryGame = () => {
 
   // handle choice
   useEffect(() => {
+    const delay = gameFinished ? 0 : 1000;
     if (choiceOne && choiceTwo) {
       if (choiceOne.icon === choiceTwo.icon) {
         setcards((prevcards: any) => {
@@ -171,9 +172,16 @@ const MemoryGame = () => {
       }
       setTimeout(() => {
         resetTurn();
-      }, 1000);
+      }, delay);
     }
-  }, [choiceOne, choiceTwo, currentPlayer, numPlayers, resetTurn]);
+  }, [
+    choiceOne,
+    choiceTwo,
+    currentPlayer,
+    gameFinished,
+    numPlayers,
+    resetTurn,
+  ]);
 
   // handle game finished
   useEffect(() => {
